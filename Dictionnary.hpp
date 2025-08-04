@@ -9,50 +9,47 @@
 
 class Dictionnary{
     
+    int input_index; 
     float objective_function;
     int number_contraints;
     int number_variables;
     int number_spread_variables;
-    float* decision_variables; 
+    float* cost_variables; 
+    float ** constraint_matrix;
 
 
-    Dictionnary(){
-        solution = new std::vector<int>;
-        SumConstraint = new std::vector<float>;
-        FitnessValue1 = 0;
-        FitnessValue2 = 0; 
-         valid = true;
-         fitnessCalculated = false; 
-         rank = 0;
-         checkrank = false;
-         crowdingdistance = 0;
+    Dictionnary(int nb_obj, int nb_bound){
+        objective_function = 0;
+        number_contraints = nb_bound;
+        number_variables = nb_obj + nb_bound;
+        cost_variables = new float[number_variables];
+        constraint_matrix = new float*[number_contraints];
+        for(int i = 0; i < number_contraints; i++){
+            constraint_matrix[i] = new float[number_variables + 1]; 
+        }
+     
     
+
+    }
+
+
+     void choose_input_index(){
+        float max = 0.0;
+        input_index = 0;
+        for(int i = 0; i < number_variables; i++){
+            if(cost_variables[i] > max){
+                max = cost_variables[i];
+            }
+
+
+
+        }
 
     }
 
 
 
 
-    
-    void displayIndividual(int NbVariable, int NbConstraints){
-
-        std::cout << "La solution créée est: "; 
-        for(int i = 0; i < NbVariable; i ++){
-
-            std::cout << " " << solution[0][i];
-
-        }
-
-        std::cout << std::endl; 
-
-        std::cout << "Les contraintes sont: "; 
-        for (int j = 0; j < NbConstraints; j++){
-
-            std::cout << " " << SumConstraint[0][j]; 
-
-        }
-        std::cout << std::endl;
-    }
 
 
     
@@ -70,7 +67,7 @@ class Dictionnary{
 
 
 
-    ~Solution(){
+    ~Dictionnary(){
 
     }
 
