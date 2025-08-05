@@ -5,36 +5,16 @@
 #include <cstdlib>
 #include <math.h>  
 #include <algorithm>
-#include "Solution.hpp"
+#include "Dictionnary.hpp"
 
-   struct Simplexe{
+   struct Simplexe: Dictionnary{
 
-    int NbVariable;
-    int NbConstraints;
-    int NbObjectives; 
-    int IndCandidat;
-    int NbPop;
-    int Nbind; 
-
-
-    /* Price function */
-    std::vector<int> * Price;
-    /* Utility function */
-
-    /*Matrix of constraint*/
-    std::vector<float>*CostMatrix;
-    /*Vector of solution*/
+   
 
 
 
 
 
-    std::vector<float> * constraint;
-    std::vector<Solution> * Population; 
-    std::vector<Solution> * Echantillon; 
-    std::vector<std::vector<Solution>> * Front; 
-    Solution IdealPoint; 
-    Solution NadirPoint; 
 
 
 
