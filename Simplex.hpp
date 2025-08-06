@@ -68,6 +68,14 @@
             }
 
         void fill_dictionnary(){
+                 for(int i = 0; i < number_constraints; i++){
+                    
+                        for(int j = 0; j < number_variables; j++){
+                            dict_form->constraint_matrix[i][j] =  A[i][j];
+
+                        }
+                    }
+
             
         }
 

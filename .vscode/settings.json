@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "*.dbclient-js": "javascript",
-        "new": "cpp"
+        "new": "cpp",
+        "iosfwd": "cpp",
+        "algorithm": "cpp"
     }
 }
