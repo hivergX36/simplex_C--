@@ -9,18 +9,21 @@
 
 class Dictionnary{
     
-    int input_index; 
-    int output_index; 
-    float objective_function;
+    
+    public:
+
+
+    int input_index;
+    int output_index;
     int number_constraints;
     int number_variables;
-    int number_spread_variables;
-    float* Cj_Zj; 
+    float* Cj_Zj;
     float ** constraint_matrix;
 
 
+
+
     Dictionnary(int nb_obj, int nb_bound){
-        objective_function = 0;
         number_constraints = nb_bound;
         number_variables = nb_obj + nb_bound;
         Cj_Zj = new float[number_variables + 1];
@@ -30,6 +33,14 @@ class Dictionnary{
         }
      
     
+
+    }
+
+    void make_dictionnary(float * x, float * b, float **A, float *Z, int nbcontraints,int nbvar){
+                Cj_Zj = new float[number_variables + 1];
+                constraint_matrix = new float*[number_constraints];
+        
+
 
     }
 
