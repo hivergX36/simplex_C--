@@ -69,14 +69,47 @@
 
         void fill_dictionnary(){
                  for(int i = 0; i < number_constraints; i++){
-                    
-                        for(int j = 0; j < number_variables; j++){
+                    dict_form->constraint_matrix[i][number_variables + number_constraints + 1] = b[i];
+                    dict_form->constraint_matrix[i][number_variables + i] = 1;
+                    for(int j = 0; j < number_variables; j++){
                             dict_form->constraint_matrix[i][j] =  A[i][j];
 
                         }
+
                     }
+                    for(int i = 0; i < number_variables; i++){
+                        dict_form->Cj_Zj[i] = 0;
+                    }
+                    for(int i = 0; i < number_constraints; i++){
+                        dict_form->Cj_Zj[number_constraints + i] = 1; 
+
+                    }
+                    dict_form->Cj_Zj[number_variables + number_constraints] = 0; 
+
 
             
+        }
+
+
+        void resolve_simplexe(){
+            int iteration_number = 0;
+            bool stop = false; 
+            while (stop == false){
+                std::cout << "iteration number is: " << iteration_number << std::endl; 
+                for(int i = 0; i < number_variables; i ++){
+                    if(dict_form->Cj_Zj[i] > 0 && iteration_number < number_variables){
+                        iteration_number += 1;
+                        dict_form->choose_input_index();
+                        dict_form->choose_pivot_line();
+                        dict_form->pivot_dictionnary(); 
+                        break; 
+                    }
+                }
+                stop = true;
+
+
+            }
+
         }
 
 };
