@@ -26,6 +26,7 @@ class Dictionnary{
 
     Dictionnary(int nb_var, int nb_bound){
         number_constraints = nb_bound;
+        std::cout << "nb_var: " << nb_var << std::endl;
         dictionnary_number_variables = nb_var + nb_bound;
         nbcol = dictionnary_number_variables + 1; 
         Cj_Zj = new float[dictionnary_number_variables + 1];
@@ -64,15 +65,15 @@ class Dictionnary{
         float test_min = 0;
         std::cout << "Input_Index " << input_index << std::endl;
         std::cout << "constraint_matrix[0][input_index]: " << constraint_matrix[0][input_index] << std::endl;
-        std::cout << "constraint_matrix[0][dictionnary_number_variables ]: " << constraint_matrix[0][nbcol] << std::endl;
+        std::cout << "constraint_matrix[0][dictionnary_number_variables ]: " << constraint_matrix[0][dictionnary_number_variables] << std::endl;
 
-        float min = constraint_matrix[0][dictionnary_number_variables + 1]/constraint_matrix[0][input_index];
+        float min = constraint_matrix[0][dictionnary_number_variables]/constraint_matrix[0][input_index];
         std::cout << " " << "min: " << min << std::endl;
         output_index = 0; 
         for(int i = 1; i < number_constraints; i++ ){
             std::cout << "constraint_matrix[i][input_index]: " << constraint_matrix[i][input_index] << std::endl;
-            std::cout << "constraint_matrix[i][dictionnary_number_variables ]: " << constraint_matrix[1][dictionnary_number_variables] << std::endl;
-            test_min = constraint_matrix[i][dictionnary_number_variables + 1]/constraint_matrix[i][input_index];
+            std::cout << "constraint_matrix[i][dictionnary_number_variables  + 1]: " << constraint_matrix[1][dictionnary_number_variables] << std::endl;
+            test_min = constraint_matrix[i][dictionnary_number_variables]/constraint_matrix[i][input_index];
             std::cout << "test_min: " << test_min << std::endl;
             if(test_min < min){
                 min = test_min;
@@ -97,13 +98,13 @@ class Dictionnary{
                 continue;
             }else{
                 factor = constraint_matrix[i][input_index];
-                for(int j = 0; j < dictionnary_number_variables + 1; j++){
+                for(int j = 0; j < nbcol; j++){
                     constraint_matrix[i][j] = constraint_matrix[i][j] - factor * constraint_matrix[output_index][j] ;
                 }
             }
         }
         factor = Cj_Zj[input_index];
-        for (int j = 0; j < dictionnary_number_variables  + 1; j++){
+        for (int j = 0; j < nbcol; j++){
             Cj_Zj[j] = Cj_Zj[j] -  factor * constraint_matrix[output_index][j];
         }
     }

@@ -162,18 +162,23 @@
                 std::cout << "iteration number is: " << iteration_number << std::endl; 
                 for(int i = 0; i < number_variables; i ++){
                     std::cout << "Ciji: " << dict_form->Cj_Zj[i] << std::endl;
-                    if(dict_form->Cj_Zj[i] > 0 && iteration_number < number_variables){
+                    if(dict_form->Cj_Zj[i] > 0){
                         iteration_number += 1;
                         std::cout << "iteration number is: " << iteration_number << std::endl; 
-
                         dict_form->choose_input_index();
                         dict_form->choose_pivot_line();
                         dict_form->pivot_dictionnary(); 
                         display_dictionnary();
-                                            stop = true; 
 
-                        break; 
+                        if(iteration_number >= number_variables){
+                        stop = true;
+                        std::cout << "Stop condition reached, exiting loop." << std::endl;
+                        break;
                     }
+
+
+                    }
+            
 
                 }
                 
